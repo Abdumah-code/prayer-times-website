@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer Times</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1 id="title">Prayer Times</h1>
+        <p id="current-date-time"></p>
+
+        <div id="language-toggle">
+            <button onclick="setLanguage('en')">English</button>
+            <button onclick="setLanguage('sv')">Swedish</button>
+            <button onclick="setLanguage('ar')">Arabic</button>
+        </div>
+
+        <div id="view-toggle">
+            <button onclick="setView('monthly')">Monthly View</button>
+            <button onclick="setView('daily')">Daily View</button>
+        </div>
+    </header>
+
+    <section id="prayer-times-section">
+        <table class="prayer-times" id="prayer-times-table">
+            <thead>
+                <tr>
+                    <th id="date-header">Date</th>
+                    <th id="day-header">Day</th>
+                    <th id="fajr-header">Fajr</th>
+                    <th id="shuruk-header">Shuruk</th>
+                    <th id="thuhr-header">Thuhr</th>
+                    <th id="asr-header">Asr</th>
+                    <th id="maghrib-header">Maghrib</th>
+                    <th id="ishaa-header">Ishaa</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
