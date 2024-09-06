@@ -39,6 +39,8 @@ let currentLanguage = 'en';
 function setLanguage(language) {
     currentLanguage = language;
     document.body.setAttribute('lang', language);
+
+    // Update the text content based on the selected language
     document.getElementById('title').textContent = translations[language].title;
     document.getElementById('date-header').textContent = translations[language].date;
     document.getElementById('day-header').textContent = translations[language].day;
@@ -48,7 +50,12 @@ function setLanguage(language) {
     document.getElementById('asr-header').textContent = translations[language].asr;
     document.getElementById('maghrib-header').textContent = translations[language].maghrib;
     document.getElementById('ishaa-header').textContent = translations[language].ishaa;
+
+    // Update the prayer table and current date/time to reflect the new language
+    loadPrayerTimes();
+    updateDateTime();
 }
+
 
 let currentView = 'monthly';
 
@@ -84,13 +91,18 @@ async function loadPrayerTimes() {
 
 function generatePrayerTable(data) {
     const tbody = document.querySelector('.prayer-times tbody');
-    tbody.innerHTML = '';
+    tbody.innerHTML = ''; // Clear any existing rows
 
     data.forEach(row => {
+        const date = new Date(row[0].trim()); // Assuming row[0] is the date in YYYY-MM-DD format
+
+        // Get the day name based on the current language
+        const dayName = date.toLocaleDateString(currentLanguage === 'ar' ? 'ar-EG' : currentLanguage, { weekday: 'short' });
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${row[0].trim()}</td>
-            <td>${row[1].trim()}</td>
+            <td>${dayName}</td>
             <td>${row[2].trim()}</td>
             <td>${row[3].trim()}</td>
             <td>${row[4].trim()}</td>
@@ -101,6 +113,7 @@ function generatePrayerTable(data) {
         tbody.appendChild(tr);
     });
 }
+
 
 function highlightToday(data) {
     const today = new Date();
@@ -123,11 +136,16 @@ function highlightToday(data) {
 
 function updateDateTime() {
     const dateTimeElement = document.getElementById('current-date-time');
+    
+    // Get the current date and time, with localized day names based on the selected language
     const now = new Date();
     const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
     const formattedDateTime = now.toLocaleDateString(currentLanguage === 'ar' ? 'ar-EG' : currentLanguage, options);
+
+    // Update the content of the date-time element
     dateTimeElement.textContent = formattedDateTime;
 }
+
 
 setInterval(updateDateTime, 1000);
 
