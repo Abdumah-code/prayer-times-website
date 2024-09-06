@@ -59,7 +59,8 @@ function setView(view) {
 
 async function loadPrayerTimes() {
     try {
-        const response = await fetch('../data/reformatted_prayer_times.csv');
+        // const response = await fetch('../data/reformatted_prayer_times.csv');
+        const response = await fetch('data/reformatted_prayer_times.csv');
         const text = await response.text();
         const rows = text.split('\n').slice(1);
         const data = rows.map(row => row.split(',')).filter(columns => columns.length >= 8 && columns[0]);
