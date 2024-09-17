@@ -9,45 +9,40 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 30px;
-}
-header #title {
-  font-size: 2.5em;
-  margin-bottom: 5px;
-  color: #333;
-}
-header #current-date-time {
-  margin-bottom: 10px;
-  font-size: 1.2em;
-  color: #666;
-}
-header #countdown-timer {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #007acc;
-  margin: 15px 0;
-}
-header #language-toggle,
-header #view-toggle {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
   margin-bottom: 20px;
 }
-header #language-toggle button,
-header #view-toggle button {
+
+#title {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+#current-date-time {
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  color: #555;
+}
+
+#language-toggle button,
+#view-toggle button {
+  margin: 5px;
   padding: 10px 20px;
   border: none;
-  background-color: #3399ff;
+  background-color: #007bff;
   color: white;
   cursor: pointer;
   border-radius: 5px;
   font-size: 1em;
   transition: background-color 0.3s ease;
 }
-header #language-toggle button:hover,
-header #view-toggle button:hover {
-  background-color: #007acc;
+
+#language-toggle button:hover,
+#view-toggle button:hover {
+  background-color: #0056b3;
+}
+
+#language-toggle, #view-toggle {
+  margin-bottom: 15px;
 }
 
 table.prayer-times {
@@ -55,34 +50,36 @@ table.prayer-times {
   border-collapse: collapse;
   margin-top: 20px;
   background-color: white;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-table.prayer-times th {
-  background-color: #0066cc;
-  color: white;
-  padding: 15px;
-  border: 1px solid #007acc;
-  font-size: 1em;
-}
+
+table.prayer-times th,
 table.prayer-times td {
   padding: 15px;
   text-align: center;
   border: 1px solid #ddd;
   font-size: 1em;
 }
-table.prayer-times tr:nth-child(even) td {
-  background-color: white;
+
+table.prayer-times th {
+  background-color: #007bff;
+  color: white;
 }
-table.prayer-times tr.highlight td {
+
+table.prayer-times td {
+  background-color: #f9f9f9;
+}
+
+table.prayer-times tr.highlight {
   background-color: #99ccff;
   font-weight: bold;
-  border-left: 4px solid #007acc;
 }
 
 body[lang=ar] {
   direction: rtl;
   text-align: right;
 }
+
 body[lang=ar] table.prayer-times th,
 body[lang=ar] table.prayer-times td {
   text-align: right;
@@ -90,26 +87,14 @@ body[lang=ar] table.prayer-times td {
 
 @media screen and (max-width: 768px) {
   header {
-    padding: 10px;
+    flex-direction: column;
   }
-  header #title {
-    font-size: 2em;
+  #language-toggle, #view-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  header #current-date-time,
-  header #countdown-timer {
-    font-size: 1.1em;
-  }
-  header #language-toggle,
-  header #view-toggle {
-    flex-wrap: wrap;
-  }
-  header button {
-    flex: 1;
-    padding: 8px 15px;
-    font-size: 0.9em;
-  }
-  table.prayer-times th,
-  table.prayer-times td {
+  table.prayer-times th, table.prayer-times td {
     padding: 10px;
     font-size: 0.9em;
   }

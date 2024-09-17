@@ -1,162 +1,103 @@
-// Variables
-$primary-color: #3399ff;
-$primary-hover-color: #007acc;
-$highlight-color: #99ccff;
-$light-background: #f4f4f4;
-$text-color: #333;
-$secondary-text-color: #666;
-$table-border-color: #ddd;
-$box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
 
-// Mixin for button styling
-@mixin button-style {
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#title {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+#current-date-time {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    color: #555;
+}
+
+#language-toggle button,
+#view-toggle button {
+    margin: 5px;
     padding: 10px 20px;
     border: none;
-    background-color: $primary-color;
+    background-color: #007bff;
     color: white;
     cursor: pointer;
     border-radius: 5px;
     font-size: 1em;
     transition: background-color 0.3s ease;
-    &:hover {
-        background-color: $primary-hover-color;
-    }
 }
 
-
-
-// General body styling
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: $light-background;
+#language-toggle button:hover,
+#view-toggle button:hover {
+    background-color: #0056b3;
 }
 
-// Header styling
-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 30px;
-
-    // Title
-    #title {
-        font-size: 2.5em;
-        margin-bottom: 5px;
-        color: $text-color;
-    }
-
-    // Current date and time
-    #current-date-time {
-        margin-bottom: 10px;
-        font-size: 1.2em;
-        color: $secondary-text-color;
-    }
-
-    // Countdown timer
-    #countdown-timer {
-        font-size: 1.5em;
-        font-weight: bold;
-        color: $primary-hover-color; 
-        margin: 15px 0;
-    }
-
-    // Toggle buttons container
-    #language-toggle,
-    #view-toggle {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 20px;
-
-        // Button styling
-        button {
-            @include button-style;
-        }
-    }
+#language-toggle, #view-toggle {
+    margin-bottom: 15px;
 }
 
-// Prayer times table styling
 table.prayer-times {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
     background-color: white;
-    box-shadow: $box-shadow;
-
-    th {
-        background-color: darken($primary-color, 20%); // Slightly darker blue
-        color: white;
-        padding: 15px;
-        border: 1px solid $primary-hover-color;
-        font-size: 1em;
-    }
-
-    td {
-        padding: 15px;
-        text-align: center;
-        border: 1px solid $table-border-color;
-        font-size: 1em;
-    }
-
-    // Alternate row colors
-    tr:nth-child(even) td {
-        background-color: lighten($primary-color, 40%); // Very light blue
-    }
-
-    // Highlight today's row
-    tr.highlight td {
-        background-color: $highlight-color; 
-        font-weight: bold;
-        border-left: 4px solid $primary-hover-color; 
-    }
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-// Right-to-left support for Arabic
+table.prayer-times th, 
+table.prayer-times td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 1em;
+}
+
+table.prayer-times th {
+    background-color: #007bff;
+    color: white;
+}
+
+table.prayer-times td {
+    background-color: #f9f9f9;
+}
+
+table.prayer-times tr.highlight {
+    background-color: #99ccff;
+    font-weight: bold;
+}
+
 body[lang="ar"] {
     direction: rtl;
     text-align: right;
-
-    table.prayer-times {
-        th,
-        td {
-            text-align: right;
-        }
-    }
 }
 
-// Responsive styling for smaller screens
+body[lang="ar"] table.prayer-times th, 
+body[lang="ar"] table.prayer-times td {
+    text-align: right;
+}
+
 @media screen and (max-width: 768px) {
     header {
-        padding: 10px;
-
-        #title {
-            font-size: 2em;
-        }
-
-        #current-date-time,
-        #countdown-timer {
-            font-size: 1.1em;
-        }
-
-        #language-toggle,
-        #view-toggle {
-            flex-wrap: wrap;
-        }
-
-        button {
-            flex: 1;
-            padding: 8px 15px;
-            font-size: 0.9em;
-        }
+        flex-direction: column;
     }
 
-    table.prayer-times {
-        th,
-        td {
-            padding: 10px;
-            font-size: 0.9em;
-        }
+    #language-toggle, #view-toggle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    table.prayer-times th, table.prayer-times td {
+        padding: 10px;
+        font-size: 0.9em;
     }
 }
