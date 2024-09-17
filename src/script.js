@@ -7,7 +7,9 @@ const translations = {
         thuhr: 'Thuhr',
         asr: 'Asr',
         maghrib: 'Maghrib',
-        ishaa: 'Ishaa'
+        ishaa: 'Ishaa',
+        monthlyView: 'Monthly View',
+        dailyView: 'Daily View'
     },
     sv: {
         title: 'Bönetider',
@@ -17,7 +19,9 @@ const translations = {
         thuhr: 'Dhuhr',
         asr: 'Asr',
         maghrib: 'Maghrib',
-        ishaa: 'Ishaa'
+        ishaa: 'Ishaa',
+        monthlyView: 'Månads Visning',
+        dailyView: 'Daglig Visning'
     },
     ar: {
         title: 'مواقيت الصلاة',
@@ -28,6 +32,8 @@ const translations = {
         asr: 'العصر',
         maghrib: 'المغرب',
         ishaa: 'العشاء',
+        monthlyView: 'عرض شهري',
+        dailyView: 'عرض يومي',
         days: {
             Sunday: 'أحد',
             Monday: 'اثنين',
@@ -40,8 +46,15 @@ const translations = {
     }
 };
 
-let currentLanguage = 'en';
+
+let currentLanguage = 'sv';
 let currentView = 'monthly';
+
+document.addEventListener('DOMContentLoaded', () => {
+    setLanguage('sv');
+    loadPrayerTimes();
+    updateDateTime();
+});
 
 function setLanguage(language) {
     currentLanguage = language;
@@ -56,9 +69,14 @@ function setLanguage(language) {
     document.getElementById('maghrib-header').textContent = translations[language].maghrib;
     document.getElementById('ishaa-header').textContent = translations[language].ishaa;
 
+    // Update the view toggle buttons
+    document.querySelector('#view-toggle button:nth-child(1)').textContent = translations[language].monthlyView;
+    document.querySelector('#view-toggle button:nth-child(2)').textContent = translations[language].dailyView;
+
     loadPrayerTimes();
     updateDateTime();
 }
+
 
 function setView(view) {
     currentView = view;
