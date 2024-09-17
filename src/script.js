@@ -9,7 +9,9 @@ const translations = {
         maghrib: 'Maghrib',
         ishaa: 'Ishaa',
         monthlyView: 'Monthly View',
-        dailyView: 'Daily View'
+        dailyView: 'Daily View',
+        nextPrayer: 'Next Prayer',
+        allPrayersDone: 'All prayers done for today'
     },
     sv: {
         title: 'Bönetider',
@@ -21,7 +23,9 @@ const translations = {
         maghrib: 'Maghrib',
         ishaa: 'Ishaa',
         monthlyView: 'Månads Visning',
-        dailyView: 'Daglig Visning'
+        dailyView: 'Daglig Visning',
+        nextPrayer: 'Nästa bön',
+        allPrayersDone: 'Alla böner är klara för idag'
     },
     ar: {
         title: 'مواقيت الصلاة',
@@ -34,6 +38,8 @@ const translations = {
         ishaa: 'العشاء',
         monthlyView: 'عرض شهري',
         dailyView: 'عرض يومي',
+        nextPrayer: 'الصلاة التالية',
+        allPrayersDone: 'تمت جميع الصلوات لليوم',
         days: {
             Sunday: 'أحد',
             Monday: 'اثنين',
@@ -47,6 +53,7 @@ const translations = {
 };
 
 
+
 let currentLanguage = 'sv';
 let currentView = 'monthly';
 
@@ -54,7 +61,64 @@ document.addEventListener('DOMContentLoaded', () => {
     setLanguage('sv');
     loadPrayerTimes();
     updateDateTime();
+    startCountdown();
 });
+
+function startCountdown(data) {
+    const today = new Date();
+    const todayFormatted = today.toLocaleDateString('en-CA');
+    const todayData = data.find(row => row[0].trim() === todayFormatted);
+
+    if (!todayData) {
+        document.getElementById('countdown-timer').textContent = `${translations[currentLanguage].nextPrayer}: ${translations[currentLanguage].allPrayersDone}`;
+        return;
+    }
+
+    function findNextPrayerTime() {
+        const now = new Date();
+        const prayerTimes = [
+            todayData[2].trim(),
+            todayData[3].trim(),
+            todayData[4].trim(),
+            todayData[5].trim(),
+            todayData[6].trim(),
+            todayData[7].trim()
+        ];
+
+        for (let time of prayerTimes) {
+            const [hours, minutes] = time.split(':').map(Number);
+            const prayerTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
+
+            if (prayerTime > now) {
+                return prayerTime;
+            }
+        }
+        return null;
+    }
+
+    function updateCountdown() {
+        const nextPrayerTime = findNextPrayerTime();
+
+        if (!nextPrayerTime) {
+            document.getElementById('countdown-timer').textContent = translations[currentLanguage].allPrayersDone;
+            return;
+        }
+
+        const now = new Date();
+        const timeDiff = nextPrayerTime - now;
+
+        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+        document.getElementById('countdown-timer').textContent = `${translations[currentLanguage].nextPrayer}: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        setTimeout(updateCountdown, 1000);
+    }
+
+    updateCountdown();
+}
+
 
 function setLanguage(language) {
     currentLanguage = language;
@@ -102,10 +166,14 @@ async function loadPrayerTimes() {
 
         generatePrayerTable(filteredData);
         highlightToday(filteredData);
+
+        // Start the countdown with the data
+        startCountdown(data);
     } catch (error) {
         console.error('Error loading CSV:', error);
     }
 }
+
 
 function generatePrayerTable(data) {
     const tbody = document.querySelector('.prayer-times tbody');
