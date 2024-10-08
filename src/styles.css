@@ -85,17 +85,35 @@ body[lang=ar] table.prayer-times td {
   text-align: right;
 }
 
+.prayer-cards {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
-  header {
-    flex-direction: column;
+  .prayer-times {
+    display: none;
   }
-  #language-toggle, #view-toggle {
+  .prayer-cards {
+    display: block;
+  }
+  .prayer-card.highlight {
+    background-color: #99ccff;
+    border-color: #0056b3;
+    box-shadow: 0 0 10px rgba(0, 86, 179, 0.2);
+  }
+  .prayer-card {
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  .prayer-card div {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
   }
-  table.prayer-times th, table.prayer-times td {
-    padding: 10px;
-    font-size: 0.9em;
+  .prayer-card div label {
+    font-weight: bold;
   }
 }/*# sourceMappingURL=styles.css.map */

@@ -58,7 +58,7 @@ const translations = {
 
 
 let currentLanguage = 'sv';
-let currentView = 'monthly';
+let currentView = 'daily';
 
 document.addEventListener('DOMContentLoaded', () => {
     setLanguage('sv');
@@ -180,35 +180,69 @@ async function loadPrayerTimes() {
 
 function generatePrayerTable(data) {
     const tbody = document.querySelector('.prayer-times tbody');
+    const cardContainer = document.getElementById('prayer-cards-container');
     tbody.innerHTML = '';
+    cardContainer.innerHTML = '';
+
+    const isMobile = window.innerWidth <= 768;
+    const today = new Date();
+    const todayFormatted = today.toLocaleDateString('en-CA');
 
     data.forEach(row => {
         const date = new Date(row[0].trim());
         const dayNumber = date.getDate();
-
-        let dayName;
+        const rowDateFormatted = date.toLocaleDateString('en-CA');
+        
+        let dayName = date.toLocaleDateString(currentLanguage, { weekday: 'long' });
         if (currentLanguage === 'ar') {
             const englishDayName = date.toLocaleDateString('en-US', { weekday: 'long' });
             dayName = 'ال' + translations.ar.days[englishDayName];
-        } else {
-            dayName = date.toLocaleDateString(currentLanguage, { weekday: 'long' });
         }
 
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${dayNumber}</td>
-            <td>${dayName}</td>
-            <td>${row[2].trim()}</td>
-            <td>${row[3].trim()}</td>
-            <td>${row[4].trim()}</td>
-            <td>${row[5].trim()}</td>
-            <td>${row[6].trim()}</td>
-            <td>${row[7].trim()}</td>
-        `;
-        tbody.appendChild(tr);
+        if (isMobile) {
+            // Create a card for mobile
+            const card = document.createElement('div');
+            card.classList.add('prayer-card');
+
+            // Highlight today's card
+            if (rowDateFormatted === todayFormatted) {
+                card.classList.add('highlight');
+            }
+
+            card.innerHTML = `
+                <div><label>${translations[currentLanguage].month}:</label> <span>${dayNumber}</span></div>
+                <div><label>${translations[currentLanguage].day}:</label> <span>${dayName}</span></div>
+                <div><label>${translations[currentLanguage].fajr}:</label> <span>${row[2].trim()}</span></div>
+                <div><label>${translations[currentLanguage].shuruk}:</label> <span>${row[3].trim()}</span></div>
+                <div><label>${translations[currentLanguage].thuhr}:</label> <span>${row[4].trim()}</span></div>
+                <div><label>${translations[currentLanguage].asr}:</label> <span>${row[5].trim()}</span></div>
+                <div><label>${translations[currentLanguage].maghrib}:</label> <span>${row[6].trim()}</span></div>
+                <div><label>${translations[currentLanguage].ishaa}:</label> <span>${row[7].trim()}</span></div>
+            `;
+            cardContainer.appendChild(card);
+
+        } else {
+            // Create table rows for larger screens
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${dayNumber}</td>
+                <td>${dayName}</td>
+                <td>${row[2].trim()}</td>
+                <td>${row[3].trim()}</td>
+                <td>${row[4].trim()}</td>
+                <td>${row[5].trim()}</td>
+                <td>${row[6].trim()}</td>
+                <td>${row[7].trim()}</td>
+            `;
+
+            if (rowDateFormatted === todayFormatted) {
+                tr.classList.add('highlight'); // Add highlight class for table row
+            }
+
+            tbody.appendChild(tr);
+        }
     });
 }
-
 
 
 function highlightToday(data) {
