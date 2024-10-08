@@ -171,7 +171,6 @@ async function loadPrayerTimes() {
         generatePrayerTable(filteredData);
         highlightToday(filteredData);
 
-        // Start the countdown with the data
         startCountdown(data);
     } catch (error) {
         console.error('Error loading CSV:', error);
