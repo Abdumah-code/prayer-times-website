@@ -1,6 +1,7 @@
 const translations = {
     en: {
         title: 'Prayer Times',
+        month: 'Oct',
         day: 'Day',
         fajr: 'Fajr',
         shuruk: 'Shuruk',
@@ -15,6 +16,7 @@ const translations = {
     },
     sv: {
         title: 'Bönetider',
+        month: 'Okt',
         day: 'Dag',
         fajr: 'Fajr',
         shuruk: 'Shuruk',
@@ -29,6 +31,7 @@ const translations = {
     },
     ar: {
         title: 'مواقيت الصلاة',
+        month: 'أكتوبر',
         day: 'اليوم',
         fajr: 'الفجر',
         shuruk: 'الشروق',
@@ -125,6 +128,7 @@ function setLanguage(language) {
     document.body.setAttribute('lang', language);
 
     document.getElementById('title').textContent = translations[language].title;
+    document.getElementById('month-header').textContent = translations[language].month;
     document.getElementById('day-header').textContent = translations[language].day;
     document.getElementById('fajr-header').textContent = translations[language].fajr;
     document.getElementById('shuruk-header').textContent = translations[language].shuruk;
@@ -181,6 +185,7 @@ function generatePrayerTable(data) {
 
     data.forEach(row => {
         const date = new Date(row[0].trim());
+        const dayNumber = date.getDate();
 
         let dayName;
         if (currentLanguage === 'ar') {
@@ -192,6 +197,7 @@ function generatePrayerTable(data) {
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
+            <td>${dayNumber}</td>
             <td>${dayName}</td>
             <td>${row[2].trim()}</td>
             <td>${row[3].trim()}</td>
@@ -203,6 +209,8 @@ function generatePrayerTable(data) {
         tbody.appendChild(tr);
     });
 }
+
+
 
 function highlightToday(data) {
     const today = new Date();
