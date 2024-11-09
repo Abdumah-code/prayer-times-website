@@ -1,7 +1,7 @@
 const translations = {
     en: {
         title: 'Prayer Times',
-        month: 'Oct',
+        month: 'Nov',
         day: 'Day',
         fajr: 'Fajr',
         shuruk: 'Shuruk',
@@ -16,7 +16,7 @@ const translations = {
     },
     sv: {
         title: 'Bönetider',
-        month: 'Okt',
+        month: 'Nov',
         day: 'Dag',
         fajr: 'Fajr',
         shuruk: 'Shuruk',
@@ -31,7 +31,7 @@ const translations = {
     },
     ar: {
         title: 'مواقيت الصلاة',
-        month: 'أكتوبر',
+        month: 'نوفيمبر',
         day: 'اليوم',
         fajr: 'الفجر',
         shuruk: 'الشروق',
