@@ -1,7 +1,7 @@
 const translations = {
     en: {
         title: 'Prayer Times',
-        month: 'Nov',
+        month: '',
         day: 'Day',
         fajr: 'Fajr',
         shuruk: 'Shuruk',
@@ -16,7 +16,7 @@ const translations = {
     },
     sv: {
         title: 'Bönetider',
-        month: 'Nov',
+        month: '',
         day: 'Dag',
         fajr: 'Fajr',
         shuruk: 'Shuruk',
@@ -31,7 +31,7 @@ const translations = {
     },
     ar: {
         title: 'مواقيت الصلاة',
-        month: 'نوفيمبر',
+        month: '',
         day: 'اليوم',
         fajr: 'الفجر',
         shuruk: 'الشروق',
@@ -55,16 +55,13 @@ const translations = {
     }
 };
 
-
-
 let currentLanguage = 'sv';
 let currentView = 'daily';
 
 document.addEventListener('DOMContentLoaded', () => {
-    setLanguage('sv');
+    setLanguage(currentLanguage);
     loadPrayerTimes();
     updateDateTime();
-    startCountdown();
 });
 
 function startCountdown(data) {
@@ -115,20 +112,16 @@ function startCountdown(data) {
         const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
         document.getElementById('countdown-timer').textContent = `${translations[currentLanguage].nextPrayer}: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-        setTimeout(updateCountdown, 1000);
     }
 
-    updateCountdown();
+    setInterval(updateCountdown, 1000);
 }
-
 
 function setLanguage(language) {
     currentLanguage = language;
     document.body.setAttribute('lang', language);
 
     document.getElementById('title').textContent = translations[language].title;
-    document.getElementById('month-header').textContent = translations[language].month;
     document.getElementById('day-header').textContent = translations[language].day;
     document.getElementById('fajr-header').textContent = translations[language].fajr;
     document.getElementById('shuruk-header').textContent = translations[language].shuruk;
@@ -137,14 +130,12 @@ function setLanguage(language) {
     document.getElementById('maghrib-header').textContent = translations[language].maghrib;
     document.getElementById('ishaa-header').textContent = translations[language].ishaa;
 
-    // Update the view toggle buttons
     document.querySelector('#view-toggle button:nth-child(1)').textContent = translations[language].monthlyView;
     document.querySelector('#view-toggle button:nth-child(2)').textContent = translations[language].dailyView;
 
     loadPrayerTimes();
     updateDateTime();
 }
-
 
 function setView(view) {
     currentView = view;
@@ -168,15 +159,19 @@ async function loadPrayerTimes() {
             filteredData = data;
         }
 
+        const monthName = new Date(data[0][0].trim()).toLocaleString(currentLanguage, { month: 'long' });
+        translations[currentLanguage].month = monthName;
+        document.getElementById('month-header').textContent = translations[currentLanguage].month;
+
         generatePrayerTable(filteredData);
         highlightToday(filteredData);
 
-        startCountdown(data);
+        const todayData = data.find(row => row[0].trim() === todayFormatted);
+        startCountdown(todayData ? [todayData] : []);
     } catch (error) {
         console.error('Error loading CSV:', error);
     }
 }
-
 
 function generatePrayerTable(data) {
     const tbody = document.querySelector('.prayer-times tbody');
@@ -200,11 +195,9 @@ function generatePrayerTable(data) {
         }
 
         if (isMobile) {
-            // Create a card for mobile
             const card = document.createElement('div');
             card.classList.add('prayer-card');
 
-            // Highlight today's card
             if (rowDateFormatted === todayFormatted) {
                 card.classList.add('highlight');
             }
@@ -220,9 +213,7 @@ function generatePrayerTable(data) {
                 <div><label>${translations[currentLanguage].ishaa}:</label> <span>${row[7].trim()}</span></div>
             `;
             cardContainer.appendChild(card);
-
         } else {
-            // Create table rows for larger screens
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${dayNumber}</td>
@@ -236,7 +227,7 @@ function generatePrayerTable(data) {
             `;
 
             if (rowDateFormatted === todayFormatted) {
-                tr.classList.add('highlight'); // Add highlight class for table row
+                tr.classList.add('highlight');
             }
 
             tbody.appendChild(tr);
@@ -244,14 +235,12 @@ function generatePrayerTable(data) {
     });
 }
 
-
 function highlightToday(data) {
     const today = new Date();
     const todayFormatted = today.toLocaleDateString('en-CA');
     const todayIndex = data.findIndex(row => row[0].trim() === todayFormatted);
 
     if (todayIndex === -1) {
-        console.log('Today not found in data.');
         return;
     }
 
@@ -271,21 +260,14 @@ function highlightToday(data) {
     });
 }
 
-
-
 function updateDateTime() {
     const dateTimeElement = document.getElementById('current-date-time');
     
     const now = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
     const formattedDateTime = now.toLocaleDateString(currentLanguage === 'ar' ? 'ar-EG' : currentLanguage, options);
 
     dateTimeElement.textContent = formattedDateTime;
 }
 
 setInterval(updateDateTime, 1000);
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadPrayerTimes();
-    updateDateTime();
-});
