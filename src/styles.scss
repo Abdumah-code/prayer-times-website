@@ -1,83 +1,93 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Noto Sans', Arial, sans-serif;
     margin: 0;
     padding: 20px;
     background-color: #f4f4f4;
+    line-height: 1.6;
 }
 
 header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 #title {
-    font-size: 2em;
-    margin-bottom: 10px;
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-weight: 700;
 }
 
 #current-date-time {
     margin-bottom: 20px;
-    font-size: 1.2em;
-    color: #555;
+    font-size: 1.3em;
+    color: #7f8c8d;
 }
 
 #language-toggle button,
 #view-toggle button {
     margin: 5px;
-    padding: 10px 20px;
+    padding: 10px 25px;
     border: none;
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 1em;
     transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #language-toggle button:hover,
 #view-toggle button:hover {
-    background-color: #0056b3;
+    background-color: #218838;
 }
 
 #language-toggle, #view-toggle {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 table.prayer-times {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 25px;
     background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 table.prayer-times th, 
 table.prayer-times td {
-    padding: 15px;
+    padding: 20px;
     text-align: center;
-    border: 1px solid #ddd;
+    border: 1px solid #e1e1e1;
     font-size: 1em;
 }
 
 table.prayer-times th {
-    background-color: #007bff;
+    background-color: #34495e;
     color: white;
+    font-weight: 600;
 }
 
 table.prayer-times td {
-    background-color: #f9f9f9;
+    background-color: #fcfcfc;
+    color: #2c3e50;
 }
 
 table.prayer-times tr.highlight {
-    background-color: #99ccff;
+    background-color: #a2d9ce;
     font-weight: bold;
+    color: #154360;
 }
 
 body[lang="ar"] {
     direction: rtl;
     text-align: right;
+    font-family: 'Amiri', serif;
 }
 
 body[lang="ar"] table.prayer-times th, 
@@ -89,7 +99,6 @@ body[lang="ar"] table.prayer-times td {
     display: none;
 }
 
-
 @media screen and (max-width: 768px) {
     .prayer-times {
         display: none; 
@@ -100,28 +109,28 @@ body[lang="ar"] table.prayer-times td {
     }
 
     .prayer-card.highlight {
-        background-color: #99ccff;
-        border-color: #0056b3;
-        box-shadow: 0 0 10px rgba(0, 86, 179, 0.2);
+        background-color: #a2d9ce;
+        border-color: #218838;
+        box-shadow: 0 0 15px rgba(33, 136, 56, 0.3);
     }
-    
 
     .prayer-card {
         background-color: white;
-        margin-bottom: 10px;
-        padding: 15px;
+        margin-bottom: 15px;
+        padding: 20px;
         border: 1px solid #ddd;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .prayer-card div {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
     }
 
     .prayer-card div label {
         font-weight: bold;
+        color: #2c3e50;
     }
 }
-
