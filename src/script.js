@@ -303,4 +303,31 @@ function updateDateTime() {
     dateTimeElement.textContent = formattedDateTime;
 }
 
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+        .then((registration) => {
+            console.log('Service Worker registered:', registration);
+
+            // Register for periodic sync
+            if ('PeriodicSyncManager' in window) {
+                registration.periodicSync.register('daily-sync', {
+                    minInterval: 24 * 60 * 60 * 1000 // Sync every 24 hours
+                }).catch((err) => {
+                    console.error('Periodic Sync registration failed:', err);
+                });
+            }
+        })
+        .catch((error) => {
+            console.error('Service Worker registration failed:', error);
+        });
+}
+
+navigator.serviceWorker.addEventListener('message', (event) => {
+    if (event.data.action === 'highlight') {
+        const today = event.data.date;
+        highlightToday([{ 0: today }]); // Adjust data format if necessary
+    }
+});
+
+
 setInterval(updateDateTime, 1000);
