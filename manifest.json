@@ -1,34 +1,42 @@
 {
-    "name": "Bönetider",
-    "short_name": "Bönetider",
-    "start_url": "/prayer-times-website/index.html",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#0a84ff",
-    "icons": [
-      {
-        "src": "/prayer-times-website/src/my logo (192).png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
-        "src": "/prayer-times-website/src/my logo (512).png",
-        "sizes": "512x512",
-        "type": "image/png"
-      }
-    ],
-    "screenshots": [
-      {
-        "src": "/prayer-times-website/src/screenshot-desktop.png",
-        "sizes": "1280x720",
-        "type": "image/png",
-        "form_factor": "wide"
-      },
-      {
-        "src": "/prayer-times-website/src/screenshot-mobile.png",
-        "sizes": "720x1280",
-        "type": "image/png"
-      }
-    ]
-  }
-  
+  "name": "Bönetider",
+  "short_name": "Bönetider",
+  "start_url": "/prayer-times-website/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a84ff",
+  "icons": [
+    {
+      "src": "/prayer-times-website/src/my logo (192).png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/prayer-times-website/src/my logo (512).png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/prayer-times-website/src/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/prayer-times-website/src/screenshot-mobile.png",
+      "sizes": "720x1280",
+      "type": "image/png"
+    }
+  ],
+  "description": "Bönetider - Ett enkelt verktyg för attveta när man ska be.",
+  "id": "com.abdumah.bonetider",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "orientation": "portrait",
+  "categories": ["utilities", "productivity", "religion"],
+  "lang": "sv",
+  "scope": "/prayer-times-website/"
+}
