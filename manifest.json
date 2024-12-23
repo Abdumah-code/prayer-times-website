@@ -30,7 +30,7 @@
       "type": "image/png"
     }
   ],
-  "description": "Bönetider - Ett enkelt verktyg för attveta när man ska be.",
+  "description": "Bönetider - Ett enkelt verktyg för att veta när man ska be.",
   "id": "com.abdumah.bonetider",
   "launch_handler": {
     "client_mode": "navigate-existing"
@@ -38,5 +38,10 @@
   "orientation": "portrait",
   "categories": ["utilities", "productivity", "religion"],
   "lang": "sv",
-  "scope": "/prayer-times-website/"
+  "scope": "/prayer-times-website/",
+  "dir": "ltr",
+  "iarc_rating_id": null,
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "scope_extensions": []
 }
