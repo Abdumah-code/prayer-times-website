@@ -1,31 +1,31 @@
 {
     "name": "Bönetider",
     "short_name": "Bönetider",
-    "start_url": "/index.html",
+    "start_url": "/prayer-times-website/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#0a84ff",
     "icons": [
       {
-        "src": "/src/my logo (192).png",
+        "src": "/prayer-times-website/src/my logo (192).png",
         "sizes": "192x192",
         "type": "image/png"
       },
       {
-        "src": "/src/my logo (512).png",
+        "src": "/prayer-times-website/src/my logo (512).png",
         "sizes": "512x512",
         "type": "image/png"
       }
     ],
     "screenshots": [
       {
-        "src": "/src/screenshot-desktop.png",
+        "src": "/prayer-times-website/src/screenshot-desktop.png",
         "sizes": "1280x720",
         "type": "image/png",
         "form_factor": "wide"
       },
       {
-        "src": "/src/screenshot-mobile.png",
+        "src": "/prayer-times-website/src/screenshot-mobile.png",
         "sizes": "720x1280",
         "type": "image/png"
       }
