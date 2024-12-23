@@ -1,3 +1,19 @@
+const monthFiles = {
+    0: 'january',
+    1: 'february',
+    2: 'march',
+    3: 'april',
+    4: 'may',
+    5: 'june',
+    6: 'july',
+    7: 'august',
+    8: 'september',
+    9: 'october',
+    10: 'november',
+    11: 'december'
+  };
+  
+
 const translations = {
     en: {
         title: 'Prayer Times',
@@ -144,7 +160,20 @@ function setView(view) {
 
 async function loadPrayerTimes() {
     try {
-        const response = await fetch('data/reformatted_prayer_times.csv');
+        const now = new Date();
+        const monthIndex = now.getMonth(); // 0 = January, 11 = December
+        const year = now.getFullYear();
+
+        // Construct the filename for the current month/year
+        const monthName = monthFiles[monthIndex];
+        const fileName = `data/${monthName} ${year}.csv`;
+
+        const response = await fetch(fileName);
+        if (!response.ok) {
+            console.error(`Error fetching ${fileName}:`, response.statusText);
+            return;
+        }
+
         const text = await response.text();
         const rows = text.split('\n').slice(1);
         const data = rows.map(row => row.split(',')).filter(columns => columns.length >= 8 && columns[0]);
@@ -159,9 +188,12 @@ async function loadPrayerTimes() {
             filteredData = data;
         }
 
-        const monthName = new Date(data[0][0].trim()).toLocaleString(currentLanguage, { month: 'long' });
-        translations[currentLanguage].month = monthName;
-        document.getElementById('month-header').textContent = translations[currentLanguage].month;
+        if (data.length > 0) {
+            const sampleDate = new Date(data[0][0].trim());
+            const monthNameLocalized = sampleDate.toLocaleString(currentLanguage === 'ar' ? 'ar-EG' : currentLanguage, { month: 'long' });
+            translations[currentLanguage].month = monthNameLocalized;
+            document.getElementById('month-header').textContent = translations[currentLanguage].month;
+        }
 
         generatePrayerTable(filteredData);
         highlightToday(filteredData);
@@ -172,6 +204,7 @@ async function loadPrayerTimes() {
         console.error('Error loading CSV:', error);
     }
 }
+
 
 function generatePrayerTable(data) {
     const tbody = document.querySelector('.prayer-times tbody');
