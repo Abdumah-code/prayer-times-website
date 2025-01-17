@@ -205,7 +205,6 @@ async function loadPrayerTimes() {
     }
 }
 
-
 function generatePrayerTable(data) {
     const tbody = document.querySelector('.prayer-times tbody');
     const cardContainer = document.getElementById('prayer-cards-container');
