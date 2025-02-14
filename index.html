@@ -9,22 +9,57 @@
     <link rel="manifest" href="./manifest.json">
 </head>
 <body>
-    <header>
-        <h1 id="title">Prayer Times</h1>
-        <p id="current-date-time"></p>
-        <p id="countdown-timer">Next Prayer: --:--:--</p>
-
-        <div id="language-toggle">
-            <button onclick="setLanguage('en')">English</button>
-            <button onclick="setLanguage('sv')">Svenska</button>
-            <button onclick="setLanguage('ar')">العربية</button>
+    <header class="header" role="banner">
+        <div class="logo-container">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/d6d4e392e230c746991539169aafa5906aad7c4c252791397d78e4f1f0fae4d0?apiKey=ffacaa6d4b4d47029a59a0143389fdb3&"
+            alt="Bönetider Logo"
+            class="logo-image"
+          />
+          <!-- Keep this ID for JS translation -->
+          <h1 class="logo-text" id="title">Prayer Times</h1>
         </div>
-
-        <div id="view-toggle">
+      
+        <div class="header-controls">
+          <!-- Language selection (use onclick for setLanguage) -->
+          <nav class="language-selector" aria-label="Language selection">
+            <button class="flag-btn" onclick="setLanguage('sv')" aria-label="Select Swedish">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/11830948708548de53e4d493ce2a4535588dd5a0b8b2f34e1faf8c60f88732b8?apiKey=ffacaa6d4b4d47029a59a0143389fdb3&"
+                alt="Swedish flag"
+                class="flag-icon"
+              />
+            </button>
+            <button class="flag-btn" onclick="setLanguage('en')" aria-label="Select English">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/795d9bcb5d2169629157fb59c1cb6ffb5032e3f12a93295500d119557e49c3e1?apiKey=ffacaa6d4b4d47029a59a0143389fdb3&"
+                alt="English flag"
+                class="flag-icon"
+              />
+            </button>
+            <button class="flag-btn" onclick="setLanguage('ar')" aria-label="Select Arabic">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/42986fa8f2dbe77b5b505154bc7b065c5a7060a617730f433008629942f3f867?apiKey=ffacaa6d4b4d47029a59a0143389fdb3&"
+                alt="Arabic flag"
+                class="flag-icon"
+              />
+            </button>
+          </nav>
+      
+          <!-- View toggles preserve monthly/daily functionality -->
+          <div id="view-toggle">
             <button onclick="setView('monthly')">Monthly View</button>
             <button onclick="setView('daily')">Daily View</button>
+          </div>
         </div>
-    </header>
+      </header>
+      
+      <!-- Current date/time + countdown separate for clarity -->
+      <div class="header-info">
+        <p id="current-date-time"></p>
+        <p id="countdown-timer">Next Prayer: --:--:--</p>
+      </div>
+      
 
     <section id="prayer-times-section">
         <table class="prayer-times" id="prayer-times-table">
