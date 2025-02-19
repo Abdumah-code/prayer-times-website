@@ -26,13 +26,11 @@ body {
     /* Tablet: stack header content vertically */
     flex-direction: column;
     align-items: flex-start;
-    padding: 0.875rem 1.875rem;
   }
 }
 @media (max-width: 640px) {
   .header {
     /* Phone: further adjust if needed */
-    padding: 0.875rem 1.25rem;
   }
 }
 .header::before {
@@ -402,6 +400,57 @@ body[lang=ar] table.prayer-times td {
   font-size: 1rem;
 }
 
+body[lang=ar] .footer-logo {
+  margin-right: 85rem;
+  padding: 0;
+}
+
+body[lang=ar] .project-description {
+  margin-right: 55rem;
+  padding: 0;
+}
+
+body[lang=ar] .mission-statement {
+  margin-right: 5rem;
+  padding: 0;
+}
+
+body[lang=ar] .team-members {
+  margin-right: 10rem;
+}
+
+@media (max-width: 991px) {
+  body[lang=ar] .footer-logo {
+    margin-right: 5rem; /* was 85rem on desktop */
+  }
+  body[lang=ar] .project-description {
+    margin-right: 5rem; /* was 55rem */
+  }
+  body[lang=ar] .mission-statement {
+    margin-right: 3rem; /* was 5rem */
+  }
+  body[lang=ar] .team-members {
+    margin-right: 17rem; /* was 10rem */
+  }
+}
+/*
+  2) Phone Breakpoint (example: max-width: 640px or 480px)
+     => Reduce margins further or make them 0 for a tight mobile layout.
+*/
+@media (max-width: 640px) {
+  body[lang=ar] .footer-logo {
+    margin-right: 5rem; /* drastically reduced from 50rem */
+  }
+  body[lang=ar] .project-description {
+    margin-right: 5rem; /* from 30rem -> 5rem */
+  }
+  body[lang=ar] .mission-statement {
+    margin-right: 5rem; /* from 3rem -> 1rem */
+  }
+  body[lang=ar] .team-members {
+    margin-right: 7rem; /* from 5rem -> 2rem */
+  }
+}
 @media screen and (max-width: 768px) {
   .prayer-times {
     display: none;
@@ -484,6 +533,7 @@ body[lang=ar] table.prayer-times td {
     z-index: 2;
   }
   .quran-verse {
+    width: 60%;
     font-size: 1.5rem;
     padding-top: 1rem;
     padding-left: 1rem;

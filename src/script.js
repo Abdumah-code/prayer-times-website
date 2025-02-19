@@ -28,7 +28,13 @@ const translations = {
         monthlyView: 'Monthly View',
         dailyView: 'Daily View',
         nextPrayer: 'Next Prayer',
-        allPrayersDone: 'All prayers done for today'
+        allPrayersDone: 'All prayers done for today',
+        projectDescription: 'This website is a charitable project, completely free for the sake of Allah. May it help you pray on time. Keep us in your sincere prayers—may Allah bless this effort, benefit the Ummah, and reward everyone involved.',
+        missionStatement: 'We created this website for free to help Muslims pray on time. May Allah accept it and make it beneficial for everyone.',
+        memberName1: 'Abdullah',
+        memberRole1: 'Web developer',
+        memberName2: 'Ammar',
+        memberRole2: 'UX designer'
     },
     sv: {
         title: 'Bönetider',
@@ -43,7 +49,13 @@ const translations = {
         monthlyView: 'Månads Visning',
         dailyView: 'Daglig Visning',
         nextPrayer: 'Nästa bön',
-        allPrayersDone: 'Alla böner är klara för idag'
+        allPrayersDone: 'Alla böner är klara för idag',
+        projectDescription: 'Denna webbplats är ett välgörenhetsprojekt, helt gratis för Allahs skull. Må den hjälpa dig att be i tid. Kom ihåg oss i dina böner — må Allah välsigna detta arbete, gynna umman och belöna alla inblandade.',
+        missionStatement: 'Vi skapade denna webbplats gratis för att hjälpa muslimer att be i tid. Må Allah acceptera den och göra den till nytta för alla.',
+        memberName1: 'Abdullah',
+        memberRole1: 'Webbutvecklare',
+        memberName2: 'Ammar',
+        memberRole2: 'UX-designer'
     },
     ar: {
         title: 'مواقيت الصلاة',
@@ -67,7 +79,14 @@ const translations = {
             Thursday: 'خميس',
             Friday: 'جمعة',
             Saturday: 'سبت'
-        }
+        },
+
+        projectDescription: 'هذا الموقع مشروع خيري مجاني تماماً لوجه الله تعالى. نرجو أن يساعدكم على أداء الصلاة في وقتها. لا تنسونا من صالح دعائكم — نسأل الله أن يبارك هذا الجهد وينفع به الأمة ويجزي كل من ساهم فيه.',
+        missionStatement: 'أنشأنا هذا الموقع مجاناً لمساعدة المسلمين على أداء الصلاة في وقتها. نسأل الله أن يتقبله ويجعله نافعاً للجميع.',
+        memberName1: 'عبد الله',
+        memberRole1: 'مطور ويب',
+        memberName2: 'عمار',
+        memberRole2: 'مصمم تجربة المستخدم'
     }
 };
 
@@ -148,6 +167,13 @@ function setLanguage(language) {
 
     document.querySelector('#view-toggle button:nth-child(1)').textContent = translations[language].monthlyView;
     document.querySelector('#view-toggle button:nth-child(2)').textContent = translations[language].dailyView;
+
+    document.getElementById('project-description').textContent = translations[language].projectDescription;
+    document.getElementById('mission-statement').textContent = translations[language].missionStatement;
+    document.getElementById('member-name-1').textContent = translations[language].memberName1;
+    document.getElementById('member-role-1').textContent = translations[language].memberRole1;
+    document.getElementById('member-name-2').textContent = translations[language].memberName2;
+    document.getElementById('member-role-2').textContent = translations[language].memberRole2;
 
     loadPrayerTimes();
     updateDateTime();
