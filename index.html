@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="src/styles.css">
     <link rel="icon" href="./src/faveicon.png" type="image/x-icon">
     <link rel="manifest" href="./manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
     <header class="header" role="banner">
@@ -55,9 +56,22 @@
       </header>
       
       <!-- Current date/time + countdown separate for clarity -->
-      <div class="header-info">
-        <p id="current-date-time"></p>
-        <p id="countdown-timer">Next Prayer: --:--:--</p>
+      <div class="calendar-container" role="region" aria-label="Calendar">
+        <div class="date-display">
+          <h2 class="day" id="calendar-day" tabindex="0">Monday</h2>
+      
+          <p class="islamic-date" id="calendar-islamic-date" tabindex="0">
+            20 Rajab, 1446 AH
+          </p>
+      
+          <p class="gregorian-date" id="calendar-gregorian-date" tabindex="0">
+            January 20, 2025
+          </p>
+      
+          <p class="countdown" id="countdown-timer" tabindex="0">
+            Next Prayer: --:--:--
+          </p>
+        </div>
       </div>
       
 
