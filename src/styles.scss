@@ -1,561 +1,655 @@
-$primary-color: #205445;
-$secondary-color: #C1D6D0;
-$text-color: #ffffff;
+// ─── DESIGN TOKENS ──────────────────────────────────────────────────────────
+$green-dark:    #205445;
+$green-darker:  #1a4438;
+$green-mid:     #2d6b58;
+$green-card:    #2a5c4a;   // hero card background (slightly lighter than header)
+$green-row:     #3a6b58;   // highlighted table row
+$light-bg:      #C1D6D0;   // page background
+$light-card:    #dce8e5;   // right-side today prayer card bg
+$white:         #ffffff;
+$text-on-dark:  #e8f4f0;
+$text-muted:    rgba(255,255,255,0.65);
+$text-body:     #1a3a2e;
+$text-muted-light: #4a7a6a;
+$border-dark:   rgba(255,255,255,0.12);
+$border-light:  rgba(32,84,69,0.15);
+$radius-lg:     14px;
+$radius-md:     10px;
 
+// ─── FONTS ──────────────────────────────────────────────────────────────────
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Amiri:wght@400;700&display=swap');
+
+// ─── RESET ──────────────────────────────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+// ─── BODY ───────────────────────────────────────────────────────────────────
 body {
-    font-family: 'Noto Sans', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    line-height: 1.6;
-    box-sizing: border-box;
-  }
-  
-  /* HEADER WRAPPER */
-  .header {
-    background-color: rgba(32, 84, 69, 1);
-    width: 100%;
-    display: flex;
-    position: relative;
-    justify-content: space-between;
-    align-items: center;
-  
-    @media (max-width: 991px) {
-      /* Tablet: stack header content vertically */
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    @media (max-width: 640px) {
-      /* Phone: further adjust if needed */
-    }
-  
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-color: rgba(32, 84, 69, 0.5); // Your semi-transparent overlay
-      z-index: 1; // Under content
-    }
-  
-    .logo-container,
-    .header-controls {
-      position: relative;
-      z-index: 2;
-    }
-  
-    background-color: #205445;
-    background-image: url("./Vector.png");
-    background-repeat: repeat;
-    background-position: center;
-    background-size: auto;
-  }
-  
-  /* LOGO AREA */
-  .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 1rem; // 16px approx
-  
-    @media (max-width: 991px) {
-      /* Tablet: 
-         Move some space below the logo if stacking */
-      margin-bottom: 1rem;
-    }
-  
-    @media (max-width: 640px) {
-      gap: 0.625rem; // 10px
-    }
-  }
-  
-  .logo-image {
-    width: 3.5625rem;  // 57px
-    height: 3.5625rem;
-    object-fit: contain;
-  
-    @media (max-width: 640px) {
-      width: 2.8125rem; // 45px
-      height: 2.8125rem;
-    }
-  }
-  
-  .logo-text {
-    color: #ffffff;
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-size: 1.5rem; // 24px
-  
-    @media (max-width: 991px) {
-      font-size: 1.25rem; // 20px
-    }
-    @media (max-width: 640px) {
-      font-size: 1.125rem; // 18px
-    }
-  }
-  
-  /* LANGUAGE SELECTOR & VIEW TOGGLE AREA */
-  .header-controls {
-    display: flex;
-    align-items: center;
-    gap: 2rem; // space between language nav and view toggle
-  
-    @media (max-width: 991px) {
-      /* Tablet: appear below the logo */
-      width: 100%;
-      justify-content: space-between;
-    }
-  
-    @media (max-width: 640px) {
-      /* Phone: stack language and view toggles vertically */
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-      width: 100%;
-    }
-  }
-  
-  .language-selector {
-    display: flex;
-    align-items: center;
-    gap: 2.4375rem; // 39px
-  
-    @media (max-width: 991px) {
-      gap: 1.25rem; // 20px
-    }
-    @media (max-width: 640px) {
-      gap: 0.9375rem; // 15px
-    }
-  }
-  
-  .flag-btn {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-  
-  .flag-icon {
-    width: 2.0625rem;  // 33px
-    height: 2.0625rem;
-    object-fit: contain;
-    transition: transform 0.2s;
-  
-    @media (max-width: 640px) {
-      width: 1.75rem;  // 28px
-      height: 1.75rem;
-    }
-  }
-  
-  /* VIEW TOGGLE (Monthly/Daily) */
-  #view-toggle {
-    display: flex;
-    gap: 0.5rem;
-  
-    button {
-      margin: 0;
-      padding: 0.75rem 1.5rem;
-      border: 2px solid #ffffff;
-      background-color: transparent;
-      color: #ffffff;
-      cursor: pointer;
-      border-radius: 999px;
-      font-size: 1rem;
-      font-weight: 600;
-      transition: background-color 0.3s ease, color 0.3s ease;
-  
-      &:hover {
-        background-color: #ffffff;
-        color: #205445;
-      }
-  
-      &:focus {
-        outline: none;
-        box-shadow: 0 0 0 0.1875rem rgba(255, 255, 255, 0.4);
-      }
+  font-family: 'DM Sans', sans-serif;
+  background-color: $light-bg;
+  color: $text-body;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
 
-      @media (max-width: 991px) {
-        padding: 0.5rem 3rem;
-        margin-right: 2rem;
-      }
-  
-      @media (max-width: 640px) {
-        /* Optionally shrink them on phones */
-        padding: 0.5rem 2rem;
-        font-size: 0.9rem;
-      }
-    }
-  }
-  
-  /* EXTRA INFO BELOW HEADER (DATE/TIME, COUNTDOWN) */
-  .header-info {
-    text-align: center;
-    margin: 1rem auto;
-  }
-  
-  #current-date-time {
-    font-size: 1.3rem;
-    color: #7f8c8d;
-    margin-bottom: 0.5rem;
-  }
-  
-  #countdown-timer {
-    font-size: 1.1rem;
-    color: #2c3e50;
-  }
-  
-  /* VISUALLY HIDDEN */
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-  
-  
-
-table.prayer-times {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 25px;
-    background-color: white;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-table.prayer-times th, 
-table.prayer-times td {
-    padding: 20px;
-    text-align: center;
-    border: 1px solid #e1e1e1;
-    font-size: 1em;
-}
-
-table.prayer-times th {
-    background-color: #34495e;
-    color: white;
-    font-weight: 600;
-}
-
-table.prayer-times td {
-    background-color: #fcfcfc;
-    color: #2c3e50;
-}
-
-table.prayer-times tr.highlight {
-    background-color: #a2d9ce;
-    font-weight: bold;
-    color: #154360;
-}
-
-body[lang="ar"] {
+  &[lang="ar"] {
     direction: rtl;
     text-align: right;
     font-family: 'Amiri', serif;
-}
-
-body[lang="ar"] table.prayer-times th, 
-body[lang="ar"] table.prayer-times td {
-    text-align: right;
-}
-
-.prayer-cards {
-    display: none;
-}
-
-.footer {
-    position: relative;
-    width: 100%;
-    background-color: #205445;
-    margin-top: 3rem;
-}
-  
-  .footer-content {
-    position: relative;
-    width: 100%;
-    min-height: 24rem;
-    background: url("https://cdn.builder.io/api/v1/image/assets/TEMP/5c8a3cf89a58f7979d7ad3fb4bf0818b3520651d4202e291cd538e93e6d7ab7e?placeholderIfAbsent=true&apiKey=ffacaa6d4b4d47029a59a0143389fdb3")
-    center/cover no-repeat;
   }
-  
-  .footer-content::before {
-    content: "";
+}
+
+// ─── HEADER ─────────────────────────────────────────────────────────────────
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 40px;
+  background-color: $green-dark;
+  // geometric pattern — uses the existing Vector.png from src/
+  background-image: url('./Vector.png');
+  background-repeat: repeat;
+  background-size: auto;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  // overlay so pattern doesn't overpower content
+  &::before {
+    content: '';
     position: absolute;
     inset: 0;
-    background-color: rgba(32, 84, 69, 0.811);
+    background-color: rgba(32, 84, 69, 0.55);
     z-index: 1;
   }
-  
-  .quran-verse {
-    position: relative;
-    z-index: 2;
-    color: #fff;
-    font-family: Poppins, sans-serif;
-    font-weight: 600;
-    font-size: 3rem;
-    line-height: 1.2;
-    margin: 0 0 0.5rem 0;
-    padding-left: 3rem;
-    padding-top: 2rem;
-    text-align: left;
-  }
-  
-  .verse-reference {
-    position: relative;
-    z-index: 2;
-    color: #fff;
-    font-family: Poppins, sans-serif;
-    font-weight: 300;
-    font-size: 1rem;
-    margin: 0 0 2rem 0;
-    padding-left: 3rem;
-    text-align: left;
-  }
-  
-  .footer-logo {
-    position: absolute;
-    z-index: 2;
-    width: 7.5rem; // ~120px
-    object-fit: contain;
-    object-position: center;
-    padding-left: 3rem;
-    margin: 0 auto 2rem auto;
-  }
-  
-  .project-description {
-    position: absolute;
-    width: 30rem;
-    z-index: 2;
-    color: #fff;
-    font-family: Poppins, sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5;
-    padding-left: 13rem;
-    margin: 0 0 2rem 0;
-  }
-  
-  .mission-statement {
-    position: relative;
-    width: 15rem;
-    z-index: 2;
-    color: #fff;
-    font-family: Poppins, sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-    width: 33rem;
-    line-height: 1.5;
-    padding-left: 55rem;
-    margin: 0 0 1rem 0;
-  }
-  
-  .team-members {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    padding-left: 63rem;
-    margin: 0 0 2rem 0;
-  }
-  
-  .member {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .member-name {
-    color: #fff;
-    font-family: Poppins, sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-  }
-  
-  .member-role {
-    color: #fff;
-    font-family: Poppins, sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-  }
 
-  body[lang="ar"] .footer-logo {
-    margin-right: 85rem;
-    padding: 0;
-  }
-
-  body[lang="ar"] .project-description {
-    margin-right: 55rem;
-    padding: 0;
-  }
-
-  body[lang="ar"] .mission-statement {
-    margin-right: 5rem;
-    padding: 0;
-  }
-
-  body[lang="ar"] .team-members {
-    margin-right: 10rem;
+  .logo-container,
+  .header-controls {
+    position: relative;
+    z-index: 2;
   }
 
   @media (max-width: 991px) {
-    body[lang="ar"] .footer-logo {
-      margin-right: 5rem;  /* was 85rem on desktop */
-    }
-    body[lang="ar"] .project-description {
-      margin-right: 5rem;  /* was 55rem */
-    }
-    body[lang="ar"] .mission-statement {
-      margin-right: 3rem;   /* was 5rem */
-    }
-    body[lang="ar"] .team-members {
-      margin-right: 17rem;   /* was 10rem */
-    }
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 20px;
+    gap: 10px;
   }
-  
-  /*
-    2) Phone Breakpoint (example: max-width: 640px or 480px)
-       => Reduce margins further or make them 0 for a tight mobile layout.
-  */
   @media (max-width: 640px) {
-    body[lang="ar"] .footer-logo {
-      margin-right: 5rem; /* drastically reduced from 50rem */
-    }
-    body[lang="ar"] .project-description {
-      margin-right: 5rem;  /* from 30rem -> 5rem */
-    }
-    body[lang="ar"] .mission-statement {
-      margin-right: 5rem;  /* from 3rem -> 1rem */
-    }
-    body[lang="ar"] .team-members {
-      margin-right: 7rem;  /* from 5rem -> 2rem */
-    }
+    padding: 12px 16px;
   }
-
-  
-@media screen and (max-width: 768px) {
-    .prayer-times {
-        display: none; 
-    }
-
-    .prayer-cards {
-        display: block; 
-    }
-
-    .prayer-card.highlight {
-        background-color: #a2d9ce;
-        border-color: #218838;
-        box-shadow: 0 0 15px rgba(33, 136, 56, 0.3);
-    }
-
-    .prayer-card {
-        background-color: white;
-        margin-bottom: 15px;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .prayer-card div {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-    }
-
-    .prayer-card div label {
-        font-weight: bold;
-        color: #2c3e50;
-    }
 }
 
-/* Example: Tablet and below */
-@media (max-width: 768px) {
-    /* Remove absolute positioning so elements stack and don't overlap */
-    .footer-logo,
-    .project-description,
-    .mission-statement,
-    {
-      position: static;       
-      margin: 1rem 5rem 2rem;
-      text-align: center;      
-      padding-left: 0;      
-      width: auto;     
-      position: relative;
-      z-index: 2;
+// ─── LOGO ────────────────────────────────────────────────────────────────────
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-image {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+
+  @media (max-width: 640px) { width: 36px; height: 36px; }
+}
+
+.logo-text {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: $white;
+  letter-spacing: 0.01em;
+
+  @media (max-width: 991px) { font-size: 1.15rem; }
+}
+
+// ─── HEADER CONTROLS ─────────────────────────────────────────────────────────
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  @media (max-width: 991px) {
+    width: 100%;
+    justify-content: space-between;
+  }
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.flag-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50%;
+  transition: transform 0.15s;
+
+  &:hover { transform: scale(1.1); }
+}
+
+.flag-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 50%;
+
+  @media (max-width: 640px) { width: 26px; height: 26px; }
+}
+
+#view-toggle {
+  display: flex;
+  gap: 8px;
+
+  button {
+    background: transparent;
+    border: 2px solid $white;
+    border-radius: 999px;
+    padding: 6px 20px;
+    color: $white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    margin: 0;
+
+    &:hover {
+      background-color: $white;
+      color: $green-dark;
     }
 
-    .team-members {
-      width: 100%;
-      position: static;       
-      margin-left: 35%;     
-      padding-left: 0;      
-      width: auto;     
-      position: relative;
-      z-index: 2;     
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.35);
+    }
 
-    }
-    
-    .footer-content {
-      min-height: auto;
-      position: relative;
-      z-index: 2;
-      text-align: center;      
+    @media (max-width: 991px) { padding: 5px 16px; margin-right: 0; }
+    @media (max-width: 640px) { padding: 4px 12px; font-size: 0.82rem; }
+  }
+}
 
+// ─── HERO SECTION ────────────────────────────────────────────────────────────
+// The two-card row (date card + today prayers card) lives inside #prayer-times-section
+// We wrap them visually. The existing HTML has the table & cards but NOT the hero —
+// we inject it via JS in script.js. Since we can't change JS here, we style the
+// calendar-container (commented out in HTML) if it gets uncommented, AND we add
+// a hero wrapper around #prayer-times-section content via CSS.
+
+// For now: style the existing section with correct page padding
+#prayer-times-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 40px 48px;
+
+  @media (max-width: 768px) { padding: 20px 16px 40px; }
+}
+
+// ─── HERO CARDS (date + today prayers) ──────────────────────────────────────
+// These match the two dark cards in the PDF mockup.
+// They are rendered by script.js. We target the calendar-container
+// and the section layout.
+
+.calendar-container {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  margin-bottom: 32px;
+
+  @media (max-width: 768px) { grid-template-columns: 1fr; }
+}
+
+// Left card — big date display
+.date-display {
+  background-color: $green-card;
+  border-radius: $radius-lg;
+  padding: 32px 36px;
+  color: $text-on-dark;
+
+  .day {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: $text-muted;
+    margin-bottom: 6px;
+  }
+
+  .islamic-date {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.6rem;
+    font-weight: 400;
+    color: $white;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+
+  .gregorian-date {
+    font-size: 0.95rem;
+    color: $text-muted;
+    margin-bottom: 0;
+  }
+
+  .countdown {
+    font-size: 1rem;
+    color: rgba(193,214,208,0.9);
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid $border-dark;
+  }
+}
+
+// Right card — prayer times list
+.prayer-list-card {
+  background-color: $green-card;
+  border-radius: $radius-lg;
+  padding: 20px 24px;
+  color: $text-on-dark;
+
+  .prayer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.9rem;
+
+    &:last-child { border-bottom: none; }
+
+    &.active {
+      color: $white;
+      font-weight: 500;
     }
-    
-    /* Scale down fonts or adjust as needed */
-    .quran-verse {
-      font-size: 3rem;
-      padding-top: 1rem;
-      padding-left: 1rem;
+
+    .prayer-name { color: $text-muted; }
+    .prayer-time { color: $white; font-weight: 500; }
+    .countdown-badge {
+      font-size: 0.75rem;
+      background: rgba(193,214,208,0.2);
+      color: #C1D6D0;
+      border-radius: 20px;
+      padding: 2px 8px;
     }
-    
-    .verse-reference {
-      font-size: 0.875rem;
-      padding-left: 1rem;
-      margin-bottom: 1rem;
+  }
+}
+
+// ─── SECTION HEADER (Månads Visning + Download as PDF) ──────────────────────
+.section-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+
+  .section-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: $text-muted-light;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .pdf-download-btn {
+    font-size: 0.8rem;
+    color: $text-muted-light;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+
+    &:hover { color: $green-dark; }
+  }
+}
+
+// ─── TABLE ───────────────────────────────────────────────────────────────────
+table.prayer-times {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: $white;
+  border-radius: $radius-md;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(32,84,69,0.08);
+  font-size: 0.9rem;
+  margin-top: 0;
+
+  thead th {
+    background-color: $white;
+    color: $text-muted-light;
+    font-weight: 500;
+    font-size: 0.82rem;
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid $border-light;
+    white-space: nowrap;
+  }
+
+  tbody td {
+    padding: 14px 18px;
+    text-align: left;
+    color: $text-body;
+    border-bottom: 1px solid $border-light;
+    background-color: $white;
+  }
+
+  tbody tr {
+    transition: background 0.12s;
+
+    &:last-child td { border-bottom: none; }
+
+    &:hover td { background-color: #f0f6f4; }
+
+    // Today's row — dark green highlight matching the PDF
+    &.highlight td {
+      background-color: $green-row !important;
+      color: $white !important;
+      font-weight: 500;
     }
   }
 
-  @media (max-width: 480px) {
-    .team-members {
-        width: 100%;
-        position: static;       
-        margin-left: 20%;     
-        padding-left: 0;      
-        width: auto;     
-        position: relative;
-        z-index: 2;     
-      }
-
-      .quran-verse {
-        width: 60%;
-        font-size: 1.5rem;
-        padding-top: 1rem;
-        padding-left: 1rem;
-      }
-      
-      .verse-reference {
-        font-size: 0.875rem;
-        padding-left: 1rem;
-        margin-bottom: 1rem;
-      }
-
+  // RTL
+  body[lang="ar"] & thead th,
+  body[lang="ar"] & tbody td {
+    text-align: right;
   }
-  
-  
+}
+
+// ─── MOBILE PRAYER CARDS ─────────────────────────────────────────────────────
+.prayer-cards { display: none; }
+
+@media screen and (max-width: 768px) {
+  table.prayer-times { display: none; }
+
+  .prayer-cards {
+    display: block;
+
+    .prayer-card {
+      background-color: $white;
+      margin-bottom: 12px;
+      padding: 18px 20px;
+      border: 1px solid $border-light;
+      border-radius: $radius-md;
+      box-shadow: 0 1px 4px rgba(32,84,69,0.08);
+
+      &.highlight {
+        background-color: $green-row;
+        border-color: $green-dark;
+
+        label { color: rgba(255,255,255,0.7); }
+        span  { color: $white; }
+      }
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+
+        label {
+          font-weight: 500;
+          color: $text-muted-light;
+          font-size: 0.85rem;
+        }
+
+        span {
+          color: $text-body;
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+}
+
+// ─── FOOTER ──────────────────────────────────────────────────────────────────
+.footer {
+  width: 100%;
+  background-color: $green-dark;
+  margin-top: 0;
+  position: relative;
+  overflow: hidden;
+
+  // geometric pattern background
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('./Vector.png');
+    background-repeat: repeat;
+    background-size: auto;
+    opacity: 0.12;
+    z-index: 0;
+  }
+}
+
+.footer-content {
+  position: relative;
+  z-index: 1;
+  background: none !important;
+  min-height: auto;
+
+  &::before { display: none; }
+}
+
+.footer-sections {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 40px 40px;
+
+  @media (max-width: 768px) { padding: 40px 20px 32px; }
+}
+
+// Quran verse — spans full width at top of footer
+.verse-logo-column {
+  grid-column: 1 / -1;
+  margin-bottom: 40px;
+}
+
+.quran-verse {
+  position: static !important;
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  font-weight: 400;
+  color: $white;
+  line-height: 1.5;
+  margin: 0 0 8px 0;
+  padding: 0;
+  text-align: left;
+  width: auto;
+}
+
+.verse-reference {
+  position: static !important;
+  font-size: 0.85rem;
+  color: $text-muted;
+  padding: 0;
+  margin: 0 0 28px 0;
+  text-align: left;
+}
+
+.footer-logo {
+  position: static !important;
+  display: block;
+  width: 64px;
+  height: auto;
+  object-fit: contain;
+  padding: 0;
+  margin: 0;
+  opacity: 0.85;
+}
+
+// Three-column footer grid
+.columns {
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr;
+  gap: 32px 48px;
+  align-items: start;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.project-description {
+  position: static !important;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: $text-muted;
+  line-height: 1.75;
+  width: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.mission-statement {
+  position: static !important;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: $text-muted;
+  line-height: 1.75;
+  width: auto !important;
+  padding: 0 !important;
+  margin: 0 0 16px 0 !important;
+}
+
+.team-members {
+  position: static !important;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
+}
+
+.member {
+  position: static !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.member-name {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: $white;
+  margin-bottom: 2px;
+}
+
+.member-role {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.82rem;
+  color: $text-muted;
+}
+
+// ─── ARABIC RTL FOOTER ───────────────────────────────────────────────────────
+body[lang="ar"] {
+  .quran-verse,
+  .verse-reference { text-align: right; }
+
+  .footer-logo,
+  .project-description,
+  .mission-statement { margin-right: 0 !important; padding-right: 0 !important; }
+
+  .team-members { flex-direction: row-reverse; }
+}
+
+// ─── DATE/TIME (hidden countdown below header) ───────────────────────────────
+.header-info { text-align: center; margin: 1rem auto; }
+
+#current-date-time {
+  font-size: 1.1rem;
+  color: $text-muted-light;
+}
+
+#countdown-timer {
+  font-size: 1rem;
+  color: #FFFFFF;
+}
+
+// ─── VISUALLY HIDDEN ─────────────────────────────────────────────────────────
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ─── TODAY PRAYER CARD ROWS ───────────────────────────────────────────────────
+.prayer-list-card {
+  .prayer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.88rem;
+
+    &:last-child { border-bottom: none; }
+
+    &.active {
+      .prayer-name, .prayer-time { color: #ffffff; font-weight: 600; }
+    }
+
+    .prayer-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .prayer-icon {
+      display: flex;
+      align-items: center;
+      opacity: 0.75;
+    }
+
+    .prayer-name { color: rgba(255,255,255,0.6); }
+
+    .prayer-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .prayer-time {
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .countdown-badge {
+      font-size: 0.72rem;
+      background: rgba(193,214,208,0.2);
+      color: #C1D6D0;
+      border-radius: 20px;
+      padding: 2px 8px;
+      white-space: nowrap;
+    }
+  }
+}
+
+// ─── ACTIVE VIEW TOGGLE BUTTON ────────────────────────────────────────────────
+#view-toggle button.active {
+  background-color: #ffffff;
+  color: #205445;
+}
